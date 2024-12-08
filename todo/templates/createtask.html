@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+    <center>
+    
+    <h2>Welcome to our website</h2>
+
+    <hr>
+    <hr>
+    <h3>Task :</h3>
+
+    <form method="POST" action="/">
+
+        {% csrf_token %}
+
+        {{TaskForm.Task_Title}}
+
+        <button type="submit">Add task</button>
+         <!-- <input type="button" >Submit <input/> -->
+
+    </form>
+
+    {% for tk in task %}
+
+    <p>{{tk}}</p>
+
+    {% if tk.completed == True %}
+    
+        <p> Task Completed : Yes </p>
+
+    {% else %}
+        <p>Task Completed : No</p>
+
+    {% endif %}
+
+    <a href="{% url 'update' tk.id %}">Update Task</a>
+    <br>
+
+    <a href="{% url 'delete' tk.id %}">Delete Task</a>
+
+    <p>{{tk.title}}</p>
+    <hr>
+{% endfor %}
+    
+</center>
+</body>
+</html>
